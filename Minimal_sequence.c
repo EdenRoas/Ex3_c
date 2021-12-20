@@ -67,15 +67,11 @@ char replace_letters(char ot){
      }
      
 }
-void Revers(char word[WORD])
-{
-  int n = strlen(word);
-  for (int i = 0; i < n / 2; i++)
-  {
-    char ch = word[i];
-    word[i] = word[n - i - 1];
-    word[n - i - 1] = ch;
-  }
+void Revers(char reWord[],char atWord[]) {
+    for (int i = 0, j = strlen(atWord)-2; i < strlen(atWord); i++,j--) {
+        *(reWord+i) = atWord[j];
+        *(reWord+i+1) = '\0';
+    }
 }
 int count_index_end(char word[], char text[],int n) {
 int count_ot=0 ;
@@ -83,7 +79,7 @@ int count_ot=0 ;
     {
         if (word[count_ot] == text[i])
         { 
-            if(count_ot == strlen(word)-1)
+            if(count_ot == strlen(word)-2)
             {
             return i;
             }
@@ -137,7 +133,7 @@ for (int i = 0; i < WORD; i++)
 {
     revers_word[i] = copy_word[i];
 }
-Revers(revers_word);
+Revers(revers_word,copy_word);
 for (int i = 0; i < strlen(txt);i++)
 {
     int index=count_index_end(copy_word,txt,i);
@@ -147,8 +143,9 @@ for (int i = 0; i < strlen(txt);i++)
     {
         if(count_prints != 0)
             printf("~");
-        for (int j = i; j <= find_min; j++)
+        for (int j = i; j <= find_min+1; j++)
         {   
+            if(txt[j] != '0')
             printf("%c",txt[j]);
         }
         count_prints++;
