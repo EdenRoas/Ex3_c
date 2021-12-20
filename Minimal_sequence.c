@@ -117,7 +117,7 @@ void Atbash_Sequences(char word[], int wordSize, char sentence[], int sentenceSi
         atbash[i] = toAtbash(word[i]);
     }
     minSequenceAtbash(atbash, wordSize, sentence, sentenceSize);
-    printf("\n");
+    //printf("\n");
 }
 
 
