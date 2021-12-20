@@ -155,6 +155,7 @@ for (int i = 0; i < strlen(txt);i++)
     }
     
 }   
+printf("\n");
 }
 
 void Anagram_Sequences(char word[WORD],char txt[TXT])
