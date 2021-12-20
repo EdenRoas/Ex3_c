@@ -61,6 +61,7 @@ void Gematria_Sequences(char word[WORD],char txt[TXT]){
             }
         }
     }
+    printf("\n");
     
 }
 char replace_letters(char ot){
