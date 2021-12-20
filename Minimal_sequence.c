@@ -153,10 +153,7 @@ for (int i = 0; i < strlen(txt);i++)
         }
         count_prints++;
     }
-}
-if(count_prints == 0){
-    printf(" ");
-}   
+} 
 printf("\n");
 }
 
@@ -234,6 +231,7 @@ void Anagram_Sequences(char word[WORD],char txt[TXT])
                 }
                 if(isAllChecked == TRUE)
                 {
+                    anagram[indexAnagram] = '\0';
                     indexAnagram = 0;
                     if(printCount > 0)
                     {
