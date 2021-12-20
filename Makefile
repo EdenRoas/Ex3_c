@@ -1,24 +1,20 @@
+all: stringProg main.o Minimal_sequence.o
 
-
-all: stringProg
-
-stringProg: main.o Minimal_sequence.a 
-	gcc -wall -o stringProg main.o Minimal_sequence.a 
-
-Minimal_sequence.a: Minimal_sequence.o
-	ar rcs Minimal_sequence.a Minimal_sequence.o
+stringProg: main.o Minimal_sequence.o
+	gcc -Wall -o stringProg main.o Minimal_sequence.o
 
 Minimal_sequence.o: Minimal_sequence.c Minimal_sequence.h
-	gcc -wall -c Minimal_sequence.c
+	gcc -Wall -c Minimal_sequence.c
 
 main.o: main.c Minimal_sequence.h
-	gcc -wall -c main.c
+	gcc -Wall -c main.c
 
 .PHONY: clean
 
-clean: 
-	rm -rf *.o *.a stringProg
+clean:
+	rm -rf *.o *.a *.out stringProg
 
-© 2021 GitHub, Inc.
-Terms
-Privacy
+# .PHONY: run
+# run: Minimal_sequence.c 
+# 	 gcc Minimal_sequence.c -lm
+# 	./a.out

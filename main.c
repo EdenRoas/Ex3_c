@@ -12,7 +12,7 @@ int main()
     scanf("%[^\n\t' ']",input_word); 
     scanf("%[^~]",input_text);
     strcat(input_text,"~");
-    Gematria_Sequences(input_word,input_text);
+    Gematria_Sequences(input_word,strlen(input_word),input_text,strlen(input_text));
     Atbash_Sequences(input_word,input_text);
     Anagram_Sequences(input_word,input_text);
     return 0;
