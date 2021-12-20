@@ -7,63 +7,6 @@
 # define TRUE 1
 # define FALSE 0
 
-
-
-// int Gematria_ot (char ot){
-//     if((ot >=97) && (ot <= 122)){
-//         return (ot-96);
-//     }
-//     if ((ot >=65) && (ot <= 90)){
-//         return (ot-64);
-//     }
-//     return 0; 
-// } 
-
-// int sum_gematria_word(char word[WORD]){
-//     int sum =0;
-//     for (int i = 0; i <strlen(word); i++)
-//     {
-//        sum +=Gematria_ot(word[i]);
-//     }
-//     return sum;
-// }
-// void Gematria_Sequences(char word[WORD],char txt[TXT]){
-//     int sum_word = sum_gematria_word(word);
-//     int sum_find = 0, j, i ,count=0;
-//     for (i = 0; i < strlen(txt) ; i++)
-//     {
-//         sum_find =0;
-//         for (j = i; j < strlen(txt); j++)
-//         {
-//             if (Gematria_ot(txt[i])==0 && sum_find==0){
-//                         break;
-//                     }
-//             sum_find += Gematria_ot(txt[j]);
-//             if (sum_find < sum_word){
-//                 continue;
-//             }
-//             else if (sum_find == sum_word){
-//                 if(count != 0){
-//                     printf("~");
-//                 }
-//                 for (int k = i; k <= j; k++)
-//                 {
-//                     printf("%c",txt[k]); 
-//                 }
-//                 count++; 
-//                 sum_find=0;
-//                 break;
-//             }
-//             else 
-//             {
-//                 sum_find = 0;
-//                 break;
-//             }
-//         }
-//     }
-//     printf("\n");
-    
-// }
 int check_ot(char ot){
     int value;
         value = ot-'`';
@@ -184,26 +127,21 @@ for (int i = 0; i < strlen(word); i++)
 {
     copy_word[i] = word[i];
 }
-//printf("the copy word :%s\n",copy_word);
 for (int i = 0; i < strlen(word); i++)
 {
         copy_word[i]=replace_letters(copy_word[i]);
 }
-//printf("the replace word :%s\n",copy_word);
 char revers_word [WORD];
 int count_prints=0;
-for (int i = 0; i < WORD; i++) //copy the replace word to new word
+for (int i = 0; i < WORD; i++)
 {
     revers_word[i] = copy_word[i];
 }
-Revers(revers_word); //now we have the reverse_replace_word
-//printf("the reverse word :%s\n",revers_word);
+Revers(revers_word);
 for (int i = 0; i < strlen(txt);i++)
 {
     int index=count_index_end(copy_word,txt,i);
     int index_reverse =count_index_end(revers_word,txt,i);
-   // printf("%d",index_reverse);
-   // printf("%d",index);
     int find_min = min_index(index , index_reverse);
     if (find_min != -1)
     {
@@ -326,42 +264,3 @@ void Anagram_Sequences(char word[WORD],char txt[TXT])
         }
     } 
 }
-// int main(){
-//     // char c; 
-//     // printf("enter char to check the ascii value:");
-//     // scanf("%c",&c);
-//     // printf("the ascii value of %c is %d",c,c);
-//     //char a;
-//     char word [WORD] = "abcd";
-//     char text [TXT] = "a-bc,dbca-zwxyzabzyxw0dcba~";
-//     //char text[TXT] = "I’m bringing home my baby bumble bee Won’t my Mommy be so proud of me I’m bringing home my baby bumble bee – OUCH!! It stung me!!~";
-//     //char word [WORD] = "bee";
-//     //printf("%s\n",text);
-//     //Revers(word);
-//     //Gematria_ot('a');
-//     //sum_gematria_word(word);
-//     Gematria_Sequences(word,strlen(word),text,strlen(text));
-//     //printf("\n");    
-//     // printf("\n");
-//      //replace_letters('!');
-//     //printf("the revers test : %s\n",word);
-//     //check_contain(text,word);
-//     //char word [word] = "a"
-//     Atbash_Sequences(word,text);
-//     //printf("\n");
-//     Anagram_Sequences(word,text);
-//     //printf("\n");
-//     //char s1 [TXT] = "abababa ba";
-//     //char s2 [WORD] = "aba";
-//     //printf("%d",a);
-//     //int index_end = count_index_end(word,text,17);
-//     //printf("%d",index_end);
-//     //int index_start = count_index_start(word,text,0);
-//    // printf("%d",index_start);
-//     //Atbash_Sequences(word ,text);
-//     //printf("the size is %d",strlen(word));
-
-//     //Gematria_Sequences(word,text);
-//     //printf("the size is %d",strlen(word));
-//     //printf("\n");
-// }

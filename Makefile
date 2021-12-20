@@ -12,9 +12,4 @@ main.o: main.c Minimal_sequence.h
 .PHONY: clean
 
 clean:
-	rm -rf *.o *.a *.out stringProg
-
-# .PHONY: run
-# run: Minimal_sequence.c 
-# 	 gcc Minimal_sequence.c -lm
-# 	./a.out
+ 	rm -rf *.o *.a *.out stringProg
