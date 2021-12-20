@@ -15,7 +15,7 @@ int main()
     printf("Gematria Sequences: ");
     Gematria_Sequences(input_word,strlen(input_word),input_text,strlen(input_text));
     printf("Atbash Sequences: ");
-    Atbash_Sequences(input_word,input_text);
+    Atbash_Sequences(input_word,strlen(input_word),input_text,strlen(input_text));
     printf("Anagram Sequences: ");
     Anagram_Sequences(input_word,strlen(input_word),input_text,strlen(input_text));
     return 0;

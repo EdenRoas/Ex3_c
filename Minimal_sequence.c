@@ -50,112 +50,76 @@ void Gematria_Sequences(char word[], int wordSize, char sentence[], int sentence
     minSequenceGematria(sentence, sentenceSize, word_gematria);
     printf("\n");
 }
-char replace_letters(char ot){
-    int count_ot =0;
-     if ((ot >=65) && (ot <= 90)){
-         count_ot = ot - 65;
-         ot = (90 - count_ot);
-         return ot ;
-     }
-     if((ot >=97) && (ot <= 122)){
-         count_ot = ot - 97;
-         ot = (122-count_ot);
-         return ot;
-     }
-     else {
-        return ot;
-     }
-     
-}
-void Revers(char word[WORD])
-{
-  int n = strlen(word);
-  for (int i = 0; i < n / 2; i++)
-  {
-    char ch = word[i];
-    word[i] = word[n - i - 1];
-    word[n - i - 1] = ch;
-  }
-}
-int count_index_end(char word[], char text[],int n) {
-int count_ot=0 ;
-    for (int i=n; i<strlen(text); i++)
-    {
-        if (word[count_ot] == text[i])
-        { 
-            if(count_ot == strlen(word)-1)
-            {
-            return i;
-            }
-        count_ot++;
-        continue;
-        }  
-        if(text[i]==32)
-        {
-        continue;
-        }
-        if (word[count_ot] != text[i]){
-            return -1;}
-    }
-    return -1;
+char toAtbash(char c){
+  if( (c<65||c>122) || (c>90 && c<97) )
+    return c;
+  if(c<90)
+        return 90-(c-'A');
+    else
+        return 122-(c-'a');    
 }
 
-int min_index(int word_index , int reverse_word_index)
-{
-    while ((word_index != -1) && (reverse_word_index != -1)){
-        if (word_index < reverse_word_index)
-            return word_index;
-        if (reverse_word_index < word_index)
-            return reverse_word_index;
-    }
-    if (word_index == -1)
-    {
-        return reverse_word_index;
-    }
-    if (reverse_word_index == -1)
-    {
-        return word_index;
-    }
-    else
-    {
-        return -1;
-    }
-}
-void Atbash_Sequences(char word[WORD],char txt[TXT]){
-char copy_word [WORD];
-for (int i = 0; i < strlen(word); i++)
-{
-    copy_word[i] = word[i];
-}
-for (int i = 0; i < strlen(word); i++)
-{
-        copy_word[i]=replace_letters(copy_word[i]);
-}
-char revers_word [WORD];
-int count_prints=0;
-for (int i = 0; i < WORD; i++)
-{
-    revers_word[i] = copy_word[i];
-}
-Revers(revers_word);
-for (int i = 0; i < strlen(txt);i++)
-{
-    int index=count_index_end(copy_word,txt,i);
-    int index_reverse =count_index_end(revers_word,txt,i);
-    int find_min = min_index(index , index_reverse);
-    if (find_min != -1)
-    {
-        if(count_prints != 0)
-            printf("~");
-        for (int j = i; j <= find_min; j++)
-        {   
-            printf("%c",txt[j]);
+void minSequenceAtbash(char word[], int wordSize, char sentence[], int sentenceSize){
+    int i,j,k,count=0;
+    for(i=0; i<sentenceSize;i++){
+        k=0;
+        for (j = i; j <sentenceSize; j++){
+            if (sentence[j]==word[k]){
+                     k++;
+                if (k==wordSize){
+                    if(count==0)
+                        count++;
+                    else
+                        printf("~");
+                    for (k=i; k<=j; k++)
+                       printf("%c", sentence[k]);
+                    break;   
+                }
+            }else{
+                if(sentence[j] == ' '){
+                    if(i==j)
+                        break;
+                    else
+                        continue;
+                }else
+                    break;
+            }
         }
-        count_prints++;
+        k=wordSize-1;
+        for (j = i; j < sentenceSize; j++){
+            if (sentence[j]==word[k]){
+                     k--;                
+                if (k==-1){
+                    if(count==0)
+                        count++;
+                    else
+                        printf("~");
+                    for (k=i; k<=j; k++)
+                       printf("%c", sentence[k]);
+                    break;   
+                }
+            }else{
+                if(sentence[j] == ' '){
+                    if(i==j)
+                        break;
+                    else
+                        continue;
+                }else
+                    break;
+            }
+        }
     }
-} 
-printf("\n");
 }
+
+void Atbash_Sequences(char word[], int wordSize, char sentence[], int sentenceSize){
+    char atbash[wordSize];
+    for (int i = 0; i < wordSize; i++){
+        atbash[i] = toAtbash(word[i]);
+    }
+    minSequenceAtbash(atbash, wordSize, sentence, sentenceSize);
+    printf("\n");
+}
+
 
 
 void textCopy(char arry[], char word[], int wordSize){
