@@ -153,11 +153,6 @@ for (int i = 0; i < strlen(txt);i++)
         }
         count_prints++;
     }
-    if (word[i - 1] == '\n' || word[i - 1] == '\t' || word[i - 1] == ' ') 
-    {
-            word[i] = '\0';
-            break;
-    }
 } 
 printf("\n");
 }
