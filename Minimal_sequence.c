@@ -67,11 +67,15 @@ char replace_letters(char ot){
      }
      
 }
-void Revers(char reWord[],char atWord[]) {
-    for (int i = 0, j = strlen(atWord)-2; i < strlen(atWord); i++,j--) {
-        *(reWord+i) = atWord[j];
-        *(reWord+i+1) = '\0';
-    }
+void Revers(char word[WORD])
+{
+  int n = strlen(word);
+  for (int i = 0; i < n / 2; i++)
+  {
+    char ch = word[i];
+    word[i] = word[n - i - 1];
+    word[n - i - 1] = ch;
+  }
 }
 int count_index_end(char word[], char text[],int n) {
 int count_ot=0 ;
@@ -79,7 +83,7 @@ int count_ot=0 ;
     {
         if (word[count_ot] == text[i])
         { 
-            if(count_ot == strlen(word)-2)
+            if(count_ot == strlen(word)-1)
             {
             return i;
             }
@@ -133,7 +137,7 @@ for (int i = 0; i < WORD; i++)
 {
     revers_word[i] = copy_word[i];
 }
-Revers(revers_word,copy_word);
+Revers(revers_word);
 for (int i = 0; i < strlen(txt);i++)
 {
     int index=count_index_end(copy_word,txt,i);
@@ -143,9 +147,8 @@ for (int i = 0; i < strlen(txt);i++)
     {
         if(count_prints != 0)
             printf("~");
-        for (int j = i; j <= find_min+1; j++)
+        for (int j = i; j <= find_min; j++)
         {   
-            if(txt[j] != '0')
             printf("%c",txt[j]);
         }
         count_prints++;
@@ -154,125 +157,51 @@ for (int i = 0; i < strlen(txt);i++)
 printf("\n");
 }
 
-void Anagram_Sequences(char word[WORD],char txt[TXT])
-{
-    int flag = TRUE, indexWord = 0, indexTxt = 0, indexAnagram = 0, maxWord = 2 * strlen(word), printCount = 0;
-    int isChecked[strlen(word)];
 
-    for(int i = 0; i < strlen(word); i++)
-    {
-        isChecked[i] = FALSE;
+void textCopy(char arry[], char word[], int wordSize){
+    for (int i = 0; i < wordSize; i++){
+        arry[i] = word[i];
     }
-    char* anagram = (char*)malloc(sizeof(char));
-    for(int i = 0; i < strlen(txt); i++)
-    {
-        indexTxt = i;
-        while(indexTxt < strlen(txt))
-        {
-            if(txt[indexTxt] == 32)
-            {
-                int isSomeCheck = FALSE;
-                for(int i = 0; i < strlen(word); i++)
-                {
-                    if(isChecked[i] == TRUE)
-                    {
-                        isSomeCheck = TRUE;
-                        //break;
-                    }
-                }
-                int isAllChecked = TRUE;
-                for(int i = 0; i < strlen(word); i++)
-                {
-                    if(isChecked[i] != 1)
-                    {
-                        isAllChecked = FALSE;
-                    }
-                }
-                if(isAllChecked == TRUE)
-                {
-                    break;
-                }
-                if(isSomeCheck == TRUE)
-                {
-                    anagram[indexAnagram] = txt[indexTxt];
-                    indexAnagram++;
-                    indexTxt++;
-                    continue;
-                }
-                else
-                {
-                    break;
-                }
+}
+
+void minSequenceAnagram(char word[], int wordSize, char sentence[], int sentenceSize){
+    char wordCopy[wordSize];
+    int count = 0, areEquals = 1;
+    for (int i = 0; i < sentenceSize-wordSize+1; i++){
+        if(sentence[i] == ' '){
+            continue;
             }
-            
-            while((indexWord < strlen(word)) && (flag))
-            {
-                if((txt[indexTxt] == word[indexWord]) && (isChecked[indexWord] != TRUE))
-                {
-                    anagram[indexAnagram] = txt[indexTxt];
-                    indexAnagram++;
-                    isChecked[indexWord] = 1;
-                    flag = FALSE;
-                    break;
-                }
-                else
-                {
-                    indexWord++;
-                } 
+        textCopy(wordCopy, word, wordSize);
+        int wscopy = wordSize;
+        for (int j = i; j < i+wscopy; j++){
+            if(j>sentenceSize)
+                break;
+            if(sentence[j] == ' '){
+                wscopy++;
+                continue;
             }
-        
-            if(!flag)
-            {
-                flag = TRUE;
-                indexTxt++;
-                indexWord = 0;
-            }
-        
-            else
-            {
-                int isAllChecked = TRUE;
-                for(int i = 0; i < strlen(word); i++)
-                {
-                    if(isChecked[i] != 1)
-                    {
-                        isAllChecked = FALSE;
-                    }
-                }
-                if(isAllChecked == TRUE)
-                {
-                    anagram[indexAnagram] = '\0';
-                    indexAnagram = 0;
-                    if(printCount > 0)
-                    {
-                        printf("~");
-                    }
-                    for(int i = 0; i < maxWord-1; i++)
-                    {
-                        printf("%c", anagram[i]);
-                    }
-                    for(int i = 0; i < strlen(word); i++)
-                    {
-                        isChecked[i] = FALSE;
-                    }
-                    printCount++;
-                    flag = TRUE;
-                    indexWord = 0;
-                    break;
-                } 
-                else
-                {
-                    for(int i = 0; i < strlen(word); i++)
-                    {
-                        isChecked[i] = FALSE;
-                    }
-                    indexAnagram = 0;
-                    flag = TRUE;
-                    indexWord = 0;
-                    break;
-                }
-            }
+            for (int k = 0; k < wordSize; k++){
+                if(wordCopy[k] == sentence[j])
+                    wordCopy[k] = '~';
+            } 
         }
-    } 
-    free(anagram);
+        for (int q = 0; q < wordSize; q++){
+            if(wordCopy[q] != '~')
+                areEquals = 0;
+        }
+        if(areEquals){
+            if(count)
+                printf("~");
+            else
+                count++;
+            for (int k=i; k<wscopy+i; k++)
+                printf("%c", sentence[k]);
+        }
+        areEquals =1;
+    }    
+}
+
+void Anagram_Sequences(char word[], int wordSize, char sentence[], int sentenceSize){
+    minSequenceAnagram(word, wordSize, sentence, sentenceSize);
     printf("\n");
 }

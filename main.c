@@ -17,6 +17,6 @@ int main()
     printf("Atbash Sequences: ");
     Atbash_Sequences(input_word,input_text);
     printf("Anagram Sequences: ");
-    Anagram_Sequences(input_word,input_text);
+    Anagram_Sequences(input_word,strlen(input_word),input_text,strlen(input_text));
     return 0;
 }

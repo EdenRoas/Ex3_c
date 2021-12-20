@@ -13,3 +13,4 @@ main.o: main.c Minimal_sequence.h
 
 clean:
 	rm -rf *.o *.a *.out stringProg
+
