@@ -177,11 +177,23 @@ void Anagram_Sequences(char word[WORD],char txt[TXT])
                 int isSomeCheck = FALSE;
                 for(int i = 0; i < strlen(word); i++)
                 {
-                    if(isChecked[i] != FALSE)
+                    if(isChecked[i] == TRUE)
                     {
                         isSomeCheck = TRUE;
-                        break;
+                        //break;
                     }
+                }
+                int isAllChecked = TRUE;
+                for(int i = 0; i < strlen(word); i++)
+                {
+                    if(isChecked[i] != 1)
+                    {
+                        isAllChecked = FALSE;
+                    }
+                }
+                if(isAllChecked == TRUE)
+                {
+                    break;
                 }
                 if(isSomeCheck == TRUE)
                 {
