@@ -166,7 +166,7 @@ void Anagram_Sequences(char word[WORD],char txt[TXT])
     {
         isChecked[i] = FALSE;
     }
-    char anagram[maxWord];
+    char* anagram = (char*)malloc(sizeof(char));
     for(int i = 0; i < strlen(txt); i++)
     {
         indexTxt = i;
@@ -263,4 +263,5 @@ void Anagram_Sequences(char word[WORD],char txt[TXT])
             }
         }
     } 
+    free(anagram);
 }
