@@ -1,4 +1,4 @@
-#include "string_lib.h"
+#include "Minimal_sequence.h"
 #include <stdio.h>
 #include <string.h>
 #define word 30
@@ -9,7 +9,7 @@ int main()
     char input_text[txt];
     
       
-    scanf("%[^\n\t' ']",input_word); //why wiyhout &?
+    scanf("%[^\n\t' ']",input_word); 
     scanf("%[^~]",input_text);
     strcat(input_text,"~");
     Gematria_Sequences(input_word,input_text);

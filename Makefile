@@ -1,23 +1,24 @@
 
-.PHONY: run
-run: Minimal_sequence.c 
-	 gcc Minimal_sequence.c -lm
-	./a.out
-# all: stringProg
 
-# stringProg: main.o string_lib.a 
-# 	$gcc $-Wall -o stringProg main.o string_lib.a 
+all: stringProg
 
-# string_lib.a: string_lib.o
-# 	ar rcs string_lib.a string_lib.o
+stringProg: main.o Minimal_sequence.a 
+	gcc -wall -o stringProg main.o Minimal_sequence.a 
 
-# string_lib.o: string_lib.c string_lib.h
-# 	$gcc $-Wall -c string_lib.c
+Minimal_sequence.a: Minimal_sequence.o
+	ar rcs Minimal_sequence.a Minimal_sequence.o
 
-# main.o: main.c string_lib.h
-# 	$gcc $-Wall -c main.c
+Minimal_sequence.o: Minimal_sequence.c Minimal_sequence.h
+	gcc -wall -c Minimal_sequence.c
 
-# .PHONY: clean
+main.o: main.c Minimal_sequence.h
+	gcc -wall -c main.c
 
-# clean: 
-# 	rm -rf *.o *.a stringProg
+.PHONY: clean
+
+clean: 
+	rm -rf *.o *.a stringProg
+
+© 2021 GitHub, Inc.
+Terms
+Privacy
