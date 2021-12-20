@@ -153,6 +153,9 @@ for (int i = 0; i < strlen(txt);i++)
         }
         count_prints++;
     }
+}
+if(count_prints == 0){
+    printf(" ");
 }   
 printf("\n");
 }
