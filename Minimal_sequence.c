@@ -274,4 +274,5 @@ void Anagram_Sequences(char word[WORD],char txt[TXT])
         }
     } 
     free(anagram);
+    printf("\n");
 }
