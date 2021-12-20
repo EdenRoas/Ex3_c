@@ -243,7 +243,6 @@ void Anagram_Sequences(char word[WORD],char txt[TXT])
                 }
                 if(isAllChecked == TRUE)
                 {
-                    anagram[indexAnagram] = '\0';
                     indexAnagram = 0;
                     if(printCount > 0)
                     {

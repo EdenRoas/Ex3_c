@@ -1,22 +1,31 @@
 #include "Minimal_sequence.h"
 #include <stdio.h>
 #include <string.h>
-#define word 30
-#define txt 1024
+# define TXT 1024
+# define WORD 30
 int main()
 {
-    char input_word[word];
-    char input_text[txt];
-    
-      
-    scanf("%[^\n\t' ']",input_word); 
-    scanf("%[^~]",input_text);
-    strcat(input_text,"~");
+    char word[WORD];
+    for (int i = 0; i < WORD; i++) {
+        if (word[i - 1] == '\n' || word[i - 1] == '\t' || word[i - 1] == ' ') {
+            word[i] = '\0';
+            break;
+        }
+        scanf("%c", &word[i]);
+    }
+    char text[TXT];
+    for (int i = 0; i < TXT; i++) {
+        if (text[i - 1] == '~') {
+            text[i] = '\0';
+            break;
+        }
+        scanf("%c", &text[i]);
+    }
     printf("Gematria Sequences: ");
-    Gematria_Sequences(input_word,strlen(input_word),input_text,strlen(input_text));
+    Gematria_Sequences(word,strlen(word),text,strlen(text));
     printf("Atbash Sequences: ");
-    Atbash_Sequences(input_word,input_text);
+    Atbash_Sequences(word,text);
     printf("Anagram Sequences: ");
-    Anagram_Sequences(input_word,input_text);
+    Anagram_Sequences(word,text);
     return 0;
 }
