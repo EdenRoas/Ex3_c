@@ -201,10 +201,10 @@ void Anagram_Sequences(char word[WORD],char txt[TXT])
         indexTxt = i;
         while(indexTxt < strlen(txt))
         {
-            if(txt[indexTxt] == 10)
-            {
-                continue;
-            }
+            // if(txt[indexTxt] == 10)
+            // {
+            //     continue;
+            // }
             if(txt[indexTxt] == 32)
             {
                 int isSomeCheck = FALSE;
