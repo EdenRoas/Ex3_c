@@ -7,7 +7,8 @@
 # define TRUE 1
 # define FALSE 0
 
-int check_ot(char ot){
+int check_ot(char ot)
+{
     int value;
         value = ot-'`';
         if (value<0)
@@ -18,53 +19,68 @@ int check_ot(char ot){
 }
 
 
-void minSequenceGematria(char sentence[], int sentenceSize, int gematria){
+void minSequenceGematria(char sentence[], int sentenceSize, int gematria)
+{
     int i,j,k,sum, count=0;
-    for(i=0; i<sentenceSize; i++){
+    for(i=0; i<sentenceSize; i++)
+    {
         sum = 0;
         if(!check_ot(sentence[i]))
             continue;
-        for(j=i; j<sentenceSize; j++){
+        for(j=i; j<sentenceSize; j++)
+        {
             sum=sum+check_ot(sentence[j]);
             if(sum>gematria) 
                 break;
-            if(sum==gematria){
+            if(sum==gematria)
+            {
                     if(count==0)
                         count++;
                     else
                         printf("~");
-                 for(k=i; k<=j; k++){
+                for(k=i; k<=j; k++)
+                {
+                    if(sentence[k] == '\0')
+                    {
+                        break;
+                    }
                     printf("%c", sentence[k]);
-                 }
+                }
                 break;  
             }
         }
     }
 }
 
-void Gematria_Sequences(char word[], int wordSize, char sentence[], int sentenceSize){
+void Gematria_Sequences(char word[], int wordSize, char sentence[], int sentenceSize)
+{
     int word_gematria =0;
-    for (int i = 0; i < wordSize; i++){
+    for (int i = 0; i < wordSize; i++)
+    {
        word_gematria += check_ot(word[i]);
     }
     minSequenceGematria(sentence, sentenceSize, word_gematria);
     printf("\n");
 }
-char replace_letters(char ot){
+
+char replace_letters(char ot)
+{
     int count_ot =0;
-     if ((ot >=65) && (ot <= 90)){
-         count_ot = ot - 65;
-         ot = (90 - count_ot);
-         return ot ;
-     }
-     if((ot >=97) && (ot <= 122)){
-         count_ot = ot - 97;
-         ot = (122-count_ot);
-         return ot;
-     }
-     else {
+    if ((ot >=65) && (ot <= 90))
+    {
+        count_ot = ot - 65;
+        ot = (90 - count_ot);
+        return ot ;
+    }
+    if((ot >=97) && (ot <= 122)){
+        count_ot = ot - 97;
+        ot = (122-count_ot);
         return ot;
-     }
+    }
+    else
+    {
+        return ot;
+    }
      
 }
 void Revers(char word[WORD])
@@ -77,25 +93,29 @@ void Revers(char word[WORD])
     word[n - i - 1] = ch;
   }
 }
-int count_index_end(char word[], char text[],int n) {
-int count_ot=0 ;
+
+int count_index_end(char word[], char text[],int n) 
+{
+    int count_ot=0 ;
     for (int i=n; i<strlen(text); i++)
     {
         if (word[count_ot] == text[i])
         { 
             if(count_ot == strlen(word)-1)
             {
-            return i;
+                return i;
             }
-        count_ot++;
-        continue;
+            count_ot++;
+            continue;
         }  
         if(text[i]==32)
         {
-        continue;
+            continue;
         }
-        if (word[count_ot] != text[i]){
-            return -1;}
+        if (word[count_ot] != text[i])
+        {
+            return -1;
+        }
     }
     return -1;
 }
@@ -121,6 +141,7 @@ int min_index(int word_index , int reverse_word_index)
         return -1;
     }
 }
+
 void Atbash_Sequences(char word[WORD],char txt[TXT]){
 char copy_word [WORD];
 for (int i = 0; i < strlen(word); i++)
@@ -149,6 +170,10 @@ for (int i = 0; i < strlen(txt);i++)
             printf("~");
         for (int j = i; j <= find_min; j++)
         {   
+            if(txt[j] == '\0')
+            {
+                break;
+            }
             printf("%c",txt[j]);
         }
         count_prints++;
@@ -167,11 +192,19 @@ void Anagram_Sequences(char word[WORD],char txt[TXT])
         isChecked[i] = FALSE;
     }
     char* anagram = (char*)malloc(sizeof(char));
+    if(anagram == NULL)
+    {
+        return;
+    }
     for(int i = 0; i < strlen(txt); i++)
     {
         indexTxt = i;
         while(indexTxt < strlen(txt))
         {
+            if(txt[indexTxt] == 10)
+            {
+                continue;
+            }
             if(txt[indexTxt] == 32)
             {
                 int isSomeCheck = FALSE;
@@ -251,6 +284,10 @@ void Anagram_Sequences(char word[WORD],char txt[TXT])
                     }
                     for(int i = 0; i < maxWord-1; i++)
                     {
+                        if(anagram[i] == '\0')
+                        {
+                            break;
+                        }
                         printf("%c", anagram[i]);
                     }
                     for(int i = 0; i < strlen(word); i++)
